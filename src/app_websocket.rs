@@ -17,9 +17,9 @@ pub struct AppWebsocket {
 }
 
 impl AppWebsocket {
-    pub async fn connect(app_url: String) -> Result<Self> {
+    pub async fn connect(app_url: String, config: WebsocketConfig) -> Result<Self> {
         let url = Url::parse(&app_url).context("invalid ws:// URL")?;
-        let websocket_config = Arc::new(WebsocketConfig::default());
+        let websocket_config = Arc::new(config);
         let (tx, _rx) = again::retry(|| {
             let websocket_config = Arc::clone(&websocket_config);
             connect(url.clone().into(), websocket_config)

@@ -26,9 +26,9 @@ pub struct EnableAppResponse {
 }
 
 impl AdminWebsocket {
-    pub async fn connect(admin_url: String) -> Result<Self> {
+    pub async fn connect(admin_url: String, config: WebsocketConfig) -> Result<Self> {
         let url = Url::parse(&admin_url).context("invalid ws:// URL")?;
-        let websocket_config = Arc::new(WebsocketConfig::default());
+        let websocket_config = Arc::new(config);
         let (tx, rx) = again::retry(|| {
             let websocket_config = Arc::clone(&websocket_config);
             connect(url.clone().into(), websocket_config)
