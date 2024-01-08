@@ -31,7 +31,7 @@ holochain_conductor_api = "0.3.0-beta-dev.29"
 holochain_websocket = "0.3.0-beta-dev.6"
 holochain_serialized_bytes = "0.0.53"
 holochain_types = "0.3.0-beta-dev.26"
-holochain_state = "0.3.0-beta-dev.28"
+holochain_nonce = "0.3.0-beta-dev.22"
 holochain_zome_types = { workspace = true }
 
 lair_keystore_api = "0.3.0"
