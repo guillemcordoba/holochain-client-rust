@@ -178,6 +178,18 @@ impl AdminWebsocket {
         }
     }
 
+    pub async fn update_coordinators(
+        &mut self,
+        update_coordinators_payload: UpdateCoordinatorsPayload,
+    ) -> ConductorApiResult<()> {
+        let msg = AdminRequest::UpdateCoordinators(update_coordinators_payload);
+        let response = self.send(msg).await?;
+        match response {
+            AdminResponse::CoordinatorsUpdated => Ok(()),
+            _ => unreachable!("Unexpected response {:?}", response),
+        }
+    }
+
     pub async fn graft_records(
         &mut self,
         cell_id: CellId,
