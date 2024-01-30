@@ -182,7 +182,7 @@ impl AdminWebsocket {
         &mut self,
         update_coordinators_payload: UpdateCoordinatorsPayload,
     ) -> ConductorApiResult<()> {
-        let msg = AdminRequest::UpdateCoordinators(update_coordinators_payload);
+        let msg = AdminRequest::UpdateCoordinators(Box::new(update_coordinators_payload));
         let response = self.send(msg).await?;
         match response {
             AdminResponse::CoordinatorsUpdated => Ok(()),
