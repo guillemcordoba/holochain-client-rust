@@ -1,7 +1,7 @@
 {
   inputs = {
     nixpkgs.follows = "holonix/nixpkgs";
-    versions.url = "github:holochain/holochain?dir=versions/weekly";
+    versions.url = "github:holochain/holochain?dir=versions/0_3_rc";
     holonix.url = "github:holochain/holochain";
     holonix.inputs.versions.follows = "versions";
   };
@@ -11,14 +11,14 @@
       # provide a dev shell for all systems that the holonix flake supports
       systems = builtins.attrNames holonix.devShells;
 
-      perSystem = { config, system, pkgs, ... }:
-        {
-          devShells.default = pkgs.mkShell {
-            inputsFrom = [ holonix.devShells.${system}.holochainBinaries ];
-            packages = with pkgs; [
+      perSystem = { config, system, pkgs, ... }: {
+        devShells.default = pkgs.mkShell {
+          inputsFrom = [ holonix.devShells.${system}.holochainBinaries ];
+          packages = with pkgs;
+            [
               # add further packages from nixpkgs
             ];
-          };
         };
+      };
     };
 }
